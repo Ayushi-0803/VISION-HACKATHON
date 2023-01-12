@@ -3,6 +3,7 @@ import Pic1 from '../../images/Pic1.png'
 import { useState } from 'react';
 import { Event } from '@mui/icons-material';
 import UserLogin from './UserLogin';
+import Registartion from './Registration'
 const TabPanel=(props)=>{
     const{children,value,index}=props;
     return(
@@ -43,7 +44,9 @@ const handleChange=(event,newValue)=>{
             </Box>
             <TabPanel value={value} index={0}><UserLogin/></TabPanel>
     
-                 <TabPanel value={value} index={1}>Registration</TabPanel>
+                 <TabPanel value={value} index={1}>Registration
+                 <Registartion/>
+                 </TabPanel>
            </Box>
            </Card>
         </Grid>

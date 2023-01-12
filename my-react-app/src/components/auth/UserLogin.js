@@ -1,10 +1,37 @@
 import { TextField, Button, Box, Alert } from "@mui/material";
-import { NavLink } from "react-router-dom";
-
+import { NavLink ,useNavigate} from "react-router-dom";
+import { useState } from "react";
 const UserLogin = () => {
+  const[error,setError]=useState({
+    status:false,
+    msg:"",
+    type:""
+  })
+  const navigate=useNavigate();
+  const handleSubmit=(e) =>{
+    e.preventDefault();
+    const data=new FormData(e.currentTarget)
+    const actualData = {
+      email: data.get('email'),
+  password: data.get('password'),
+    };
+    
+    //Violation
+    if(actualData.email && actualData.password){
+      console.log(actualData);
+      document.getElementById('login-form').reset()
+      setError({status:true,msg:"Login Success",type:'success'})
+      navigate('/')
+    }
+    else
+    {
+      setError({ status: true, msg: "All Fields are required", type:'error' });
+    }
+  }
   return (
     <>
-      <Box component="form" noValidate sx={{ mt: 1 }} id="login-form">
+      <Box component="form" noValidate sx={{ mt: 1 }} id="login-form"
+      onSubmit={handleSubmit}>
         <TextField
           margin="normal"
           required
@@ -28,6 +55,8 @@ const UserLogin = () => {
           </Button>
         </Box>
         <NavLink to='/'>Forgot Password ?</NavLink>
+      {error.status?<Alert severity={error.type}>{error.msg}</Alert>:' '
+};
       </Box>
     </>
   );
