@@ -30,8 +30,13 @@ const UserLogin = () => {
   }
   return (
     <>
-      <Box component="form" noValidate sx={{ mt: 1 }} id="login-form"
-      onSubmit={handleSubmit}>
+      <Box
+        component="form"
+        noValidate
+        sx={{ mt: 1 }}
+        id="login-form"
+        onSubmit={handleSubmit}
+      >
         <TextField
           margin="normal"
           required
@@ -50,13 +55,16 @@ const UserLogin = () => {
           type="password"
         />
         <Box textAlign="center">
-          <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 ,px:5}}>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{ mt: 3, mb: 2, px: 5 }}
+          >
             Login
           </Button>
         </Box>
-        <NavLink to='/'>Forgot Password ?</NavLink>
-      {error.status?<Alert severity={error.type}>{error.msg}</Alert>:' '
-};
+        <NavLink to="/sendpassemail">Forgot Password ?</NavLink>
+        {error.status ? <Alert severity={error.type}>{error.msg}</Alert> : " "};
       </Box>
     </>
   );

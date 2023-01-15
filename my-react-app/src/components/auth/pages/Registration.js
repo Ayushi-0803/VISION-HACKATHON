@@ -3,7 +3,7 @@ import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Registration=()=>{
-    const[error,setError]=useState({
+        const[error,setError]=useState({
     status:false,
     msg:"",
     type:""
@@ -13,25 +13,39 @@ const Registration=()=>{
     e.preventDefault();
     const data=new FormData(e.currentTarget)
     const actualData = {
-      email: data.get('email'),
+      name: data.get('name'),
   password: data.get('password'),
+  email: data.get('email'),
+  password_confirmation: data.get('password_confirmation'),
+  scholar_no: data.get('scholar_no'),
+   contact_no: data.get('contact_no'),
+course: data.get('course'),
+  branch: data.get('branch'),
+room_no: data.get('room_no'),
     };
     
     //Violation
     if(actualData.email && actualData.password){
       console.log(actualData);
+      if(actualData.password===actualData.password_confirmation){
+        console.log(actualData)
       document.getElementById('login-form').reset()
       setError({status:true,msg:"Login Success",type:'success'})
       navigate('/')
     }
     else
     {
-      setError({ status: true, msg: "All Fields are required", type:'error' });
+       setError({status:true,msg:"Password and confirm Password doesn't match",type:'error'}) 
     }
   }
+  else
+    {
+      setError({ status: true, msg: "All Fields are required", type:'error' });
+    }
+  
     return(
     <>
-   <Box component="form" noValidate sx={{ mt: 1 }} id="registration-form"
+   <Box component="form" noValidate sx={{ mt: 1 ,ml:2 }} id="registration-form"
       onSubmit={handleSubmit}>
         <TextField
           margin="normal"
@@ -57,6 +71,14 @@ const Registration=()=>{
           name="room_no"
           label="Room Number"
         />
+       <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="contact_no"
+          name="contact_no"
+          label="Contact Number"
+        /> 
         <TextField
           margin="normal"
           required
@@ -73,6 +95,9 @@ const Registration=()=>{
           name="branch"
           label="Branch"
         />
+        
+
+
         <TextField
           margin="normal"
           required
@@ -110,5 +135,6 @@ const Registration=()=>{
       </Box>
     </>
     );
+}
 }
 export default Registration;
