@@ -3,7 +3,7 @@ import Pic1 from "../../images/Pic1.png";
 import { useState } from "react";
 import { Event } from "@mui/icons-material";
 import UserLogin from "./UserLogin";
-import Registartion from "./Registration";
+import Registration from "./Registration";
 const TabPanel = (props) => {
   const { children, value, index } = props;
   return (
@@ -28,7 +28,9 @@ const LoginReg = () => {
             backgroundImage: `url(${Pic1})`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
-            beckgroundPosition: "center",
+            width:"10vw",
+            height:"90vh",
+            backgroundPosition: "center",
             display: { xs: "none", sm: "block" },
           }}
         ></Grid>
@@ -58,7 +60,7 @@ const LoginReg = () => {
               </TabPanel>
 
               <TabPanel value={value} index={1}>
-                <Registartion />
+            <Registration/>
               </TabPanel>
             </Box>
           </Card>
