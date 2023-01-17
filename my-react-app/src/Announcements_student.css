@@ -1,0 +1,27 @@
+.announcement-card {
+    margin-bottom: 30px;
+  }
+  
+  .card {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #ccc;
+  }
+  
+  .card-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .card-date {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .card-text {
+    font-size: 16px;
+    color: #333;
+  }
+  

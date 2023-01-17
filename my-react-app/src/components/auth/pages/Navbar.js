@@ -30,7 +30,16 @@ const Navbar = () => {
             >
               Contact
             </Button>
-           
+            <Button
+              component={NavLink}
+              to="/announcements"
+              style={({ isActive }) => {
+                return { backgroundColor: isActive ? "#6d1b7b" : " " };
+              }}
+              sx={{ color: "white" }}
+            >
+              Announcements
+            </Button>
             <Button
               component={NavLink}
               to="/login"
