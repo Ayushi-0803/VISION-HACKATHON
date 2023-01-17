@@ -8,7 +8,7 @@ const Navbar = () => {
         <AppBar position="static" color="secondary">
           <Toolbar>
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-    MANIT
+              MANIT
             </Typography>
             <Button
               component={NavLink}
@@ -30,6 +30,7 @@ const Navbar = () => {
             >
               Contact
             </Button>
+           
             <Button
               component={NavLink}
               to="/login"

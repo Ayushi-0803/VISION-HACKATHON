@@ -1,33 +1,34 @@
 import { TextField, Button, Box, Alert } from "@mui/material";
-import { NavLink ,useNavigate} from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 const UserLogin = () => {
-  const[error,setError]=useState({
-    status:false,
-    msg:"",
-    type:""
-  })
-  const navigate=useNavigate();
-  const handleSubmit=(e) =>{
+  const [error, setError] = useState({
+    status: false,
+    msg: "",
+    type: "",
+  });
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const data=new FormData(e.currentTarget)
+    const data = new FormData(e.currentTarget);
     const actualData = {
-      email: data.get('email'),
-  password: data.get('password'),
+      email: data.get("email"),
+      password: data.get("password"),
     };
-    
+
     //Violation
-    if(actualData.email && actualData.password){
+    if (actualData.email && actualData.password) {
       console.log(actualData);
-      document.getElementById('login-form').reset()
-      setError({status:true,msg:"Login Success",type:'success'})
-      navigate('/')
+      document.getElementById("login-form").reset();
+      setError({ status: true, msg: "Login Success", type: "success" });
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 3000);
+    
+    } else {
+      setError({ status: true, msg: "All Fields are required", type: "error" });
     }
-    else
-    {
-      setError({ status: true, msg: "All Fields are required", type:'error' });
-    }
-  }
+  };
   return (
     <>
       <Box

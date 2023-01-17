@@ -16,9 +16,9 @@ const SendPassEmail = () => {
     };
 
     //Violation
-    if (actualData.email && actualData.password) {
+    if (actualData.email ) {
       console.log(actualData);
-      document.getElementById("login-form").reset();
+      document.getElementById("password-reset-form").reset();
       setError({ status: true, msg: "Password Reset Email sent", type: "success" });
 
     } else {
