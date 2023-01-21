@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "@firebase/firestore";
-
+import {getAuth} from 'firebase/auth'
 const firebaseConfig = {
   apiKey: "AIzaSyDBfpg7m_mua3Ey8dBcfAOs0TIPx7K1exI",
   authDomain: "react-hotelmanagement.firebaseapp.com",
@@ -11,5 +11,7 @@ const firebaseConfig = {
   measurementId: "G-92EF2S16HG",
 };
 const app = initializeApp(firebaseConfig);
-
 export const db = getFirestore(app);
+const auth=getAuth();
+export{auth};
+

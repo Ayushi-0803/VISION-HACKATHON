@@ -1,73 +1,36 @@
-import { TextField, Button, Box, Alert } from "@mui/material";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
-const UserLogin = () => {
-  const [error, setError] = useState({
-    status: false,
-    msg: "",
-    type: "",
-  });
-  const navigate = useNavigate();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const actualData = {
-      email: data.get("email"),
-      password: data.get("password"),
-    };
+import React from"react";
+import{Link} from "react-router-dom";
+import{Form}from "react-bootstrap";
+import{Button}from "react-bootstrap";
 
-    //Violation
-    if (actualData.email && actualData.password) {
-      console.log(actualData);
-      document.getElementById("login-form").reset();
-      setError({ status: true, msg: "Login Success", type: "success" });
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 3000);
-    
-    } else {
-      setError({ status: true, msg: "All Fields are required", type: "error" });
-    }
-  };
+const UserLogin=()=>{
   return (
     <>
-      <Box
-        component="form"
-        noValidate
-        sx={{ mt: 1 }}
-        id="login-form"
-        onSubmit={handleSubmit}
-      >
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          name="email"
-          label="Email Address"
-        />
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="password"
-          name="password"
-          label="Password"
-          type="password"
-        />
-        <Box textAlign="center">
-          <Button
-            type="submit"
-            variant="contained"
-            sx={{ mt: 3, mb: 2, px: 5 }}
-          >
-            Login
-          </Button>
-        </Box>
-        <NavLink to="/sendpassemail">Forgot Password ?</NavLink>
-        {error.status ? <Alert severity={error.type}>{error.msg}</Alert> : " "};
-      </Box>
+      <div className="p-4 box">
+        <h2 className="mb-3">Login </h2>
+        <Form>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Control type="email" placeholder="Email Address" />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicpassword">
+            <Form.Control type="password" placeholder="Password" />
+          </Form.Group>
+
+          <div className="d-grid gap-2">
+            <Button variant="primary" type="submit">
+              Log In
+            </Button>
+          </div>
+        </Form>
+        <hr/>
+
+      </div>
+      <div className="p-4 box mt-3 text-center">
+        Don't have an account?<Link to="/signUp">
+          Register
+        </Link>
+      </div>
     </>
   );
-};
+}
 export default UserLogin;

@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" color="secondary">
+        <AppBar position="static" color="secondary" width="100vw">
           <Toolbar>
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
               MANIT
@@ -48,7 +48,17 @@ const Navbar = () => {
               }}
               sx={{ color: "white" }}
             >
-              Login/Register
+              Login
+            </Button>
+            <Button
+              component={NavLink}
+              to="/signUp"
+              style={({ isActive }) => {
+                return { backgroundColor: isActive ? "#6d1b7b" : " " }
+              }}
+              sx={{ color: "white" }}
+            >
+             Register
             </Button>
           </Toolbar>
         </AppBar>

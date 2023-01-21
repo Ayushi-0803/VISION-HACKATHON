@@ -1,20 +1,26 @@
 import { collection, FieldValue } from "firebase/firestore";
 import { useState, useEffect } from "react";
-import { db } from '../../../firebase-config';
+import { db } from '../../../firebase-config'
 import { getDocs, addDoc, doc, deleteDoc } from "firebase/firestore"
 import { async } from "@firebase/util";
 import { Container, Row, Col } from 'react-bootstrap';
-import '../../../Announcements_student.css';
+
+
 
 
 
 const Announcements_student = () => {
+
+    const [newAnnouncement, setNewAnnouncement] = useState("");
     const [announcements, setAnnouncements] = useState([]);
-    const announcementsCollectionsref = collection(db, "Announcements")
+    const announcementsCollectionref = collection(db, "Announcements")
+
+
+
 
     useEffect(() => {
         const getAnnouncements = async () => {
-            const data = await getDocs(announcementsCollectionsref)
+            const data = await getDocs(announcementsCollectionref)
             setAnnouncements(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
         };
 
@@ -23,32 +29,37 @@ const Announcements_student = () => {
 
     )
 
-    return (
-        <div className="container-fluid" style={{ padding: 30 }}>
-            <h1 >Announcements</h1>
-            <h6>"Stay Informed: Check Our Announcement Section for Upcoming News and Updates!"</h6>
-            <br/>
-            <br/>
-            <br/>
-            
-            {announcements.map((announcement) => {
-                return(
-                <div>
-                
-                <Col className="announcement-card" xs={12} md={6} lg={4}>
-                    <div className="card">
-                        <div className="card-body">
-                        
-                            <p className="card-text">{announcement.Announcement}</p>
-                        </div>
-                    </div>
-                </Col>
-                </div>
-                )
-            })}
 
+
+
+    return (
+        <div className="container-fluid" style={{ padding: 50 }}>
+            <h1 style={{color:"purple"}}>Announcements</h1>
+            <h6>"Stay Informed: Check Our Announcement Section for Upcoming News and Updates!"</h6>
+
+            <br />
+            <br />
+
+            <div class="card-deck" >
+                {announcements.map((announcement) => {
+                    return (
+
+                        <div class="card" style={{ marginBottom: 20 }}>
+
+                            <div class="card-body">
+
+                                <p class="card-text">{announcement.Announcement}</p>
+                            </div>
+                        </div>
+
+                    )
+                })}
+            </div>
+
+            <h6>Total Announcements : {announcements.length}</h6>
         </div>
-    )
+    );
 };
+
 
 export default Announcements_student;
