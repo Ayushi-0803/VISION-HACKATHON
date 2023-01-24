@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState ,useEffect} from "react";
+import { Link,useNavigate} from "react-router-dom";
 import { Form ,Alert} from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useUserAuth } from "../../../context/UserAuthContext";
@@ -14,11 +14,19 @@ const Registration = () => {
   const [course, setCourse] = useState("");
   const[error,setError]=useState("");
   const {signUp}=useUserAuth();
+  const navigate=useNavigate();
   const handleSubmit=async(e)=>{
                 e.preventDefault();
                 setError("")
                 try{
                   await signUp(email, password, name, contact, scholar_no,branch,course);
+                
+                  navigate("/dashboard")
+                     setTimeout(() => {
+                     alert("registration successful")
+                     }, 3000);
+
+   
                 }
                 catch(err){
                   setError(err.message)
