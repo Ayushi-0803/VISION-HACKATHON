@@ -3,7 +3,9 @@ import { Link,useNavigate} from "react-router-dom";
 import { Form ,Alert} from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useUserAuth } from "../../../context/UserAuthContext";
-
+import { db } from "../../../firebase-config";
+import { collection, addDoc } from "firebase/firestore";
+import Pic1 from "../../images/Pic1.png";
 const Registration = () => {
   const[email,setEmail]=useState("");
   const [password, setPassword] = useState("");
@@ -13,15 +15,25 @@ const Registration = () => {
   const [branch, setBranch] = useState("");
   const [course, setCourse] = useState("");
   const[error,setError]=useState("");
+  const usersCollectionRef = collection(db, "Register");
   const {signUp}=useUserAuth();
   const navigate=useNavigate();
   const handleSubmit=async(e)=>{
                 e.preventDefault();
                 setError("")
                 try{
+                 await addDoc(usersCollectionRef, {
+                    name: name,
+                    Contact: contact,
+                    ScholarNo: scholar_no,
+                    email: email,
+                    Branch: branch,
+                    Course: course,
+                  }
+                  
+                  );
                   await signUp(email, password, name, contact, scholar_no,branch,course);
-                
-                  navigate("/dashboard")
+                  navigate("/dashboard?email=${email}")
                      setTimeout(() => {
                      alert("registration successful")
                      }, 3000);
@@ -35,8 +47,18 @@ const Registration = () => {
               }
   return (
     <>
-      <div className="p-4 box">
+  <img
+                      src={Pic1}
+                      alt=""
+                      width="600px"
+                      height="600px"
+                      display="flex"
+                      flex-direction="column"
+                      align-items="center"
+                    />
+      <div className="p-4 box" style={{ marginTop:-600 ,marginLeft:590 }}>
         <h2 className="mb-3">Register </h2>
+       
         {error &&<Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicName">
@@ -98,7 +120,10 @@ const Registration = () => {
         <hr />
       </div>
       <div className="p-4 box mt-3 text-center">
-        Already have an account?<Link to="/login">Log In</Link>
+      Already have an account?
+              <Link to="/login" style={{ color: "blue" }}>
+                Log In
+              </Link>
       </div>
     </>
   );

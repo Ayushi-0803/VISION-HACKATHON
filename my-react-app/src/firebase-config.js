@@ -8,7 +8,9 @@ const firebaseConfig = {
   storageBucket: "react-hotelmanagement.appspot.com",
   messagingSenderId: "414966392773",
   appId: "1:414966392773:web:c73caef5e2ad3e17568dac",
-  measurementId: "G-92EF2S16HG",
+  measurementId: "G-92EF2S16HG"
+ 
+
 };
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);

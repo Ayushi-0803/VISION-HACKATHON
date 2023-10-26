@@ -12,6 +12,7 @@ import { AuthProvider } from "./context/UserAuthContext";
 import UserLogin from "./components/auth/pages/UserLogin";
 import Registration from "./components/auth/pages/Registration";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
+import Attendance from "./components/auth/pages/Attendance";
 function App() {
   return (
     <>
@@ -26,8 +27,11 @@ function App() {
             <Route path="/announcements" element={<Announcements_student />} />
 
             <Route path="/reset" element={<ResetPassword />} />
-          </Route>
+        
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/attendance" element={<Attendance />} />
+          <Route path="/send" element={<SendPassEmail />} />
+          </Route>
         </Routes>
       </UserAuthContextProvider>
     </>

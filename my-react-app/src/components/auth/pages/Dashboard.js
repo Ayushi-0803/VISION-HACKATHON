@@ -1,28 +1,58 @@
-import{Button,CssBaseline,Grid,Typography}from '@mui/material'
-import {useNavigate} from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Alert } from "react-bootstrap";
+import { db } from "../../../firebase-config";
+import { collection, getDocs } from "firebase/firestore";
+import { useLocation } from "react-router-dom";
 
+const Dashboard = () => {
+  const [userData, setUserData] = useState([]);
+  const [error, setError] = useState("");
+  const usersCollectionRef = collection(db, "Register");
+  const location = useLocation();
 
-const Dashboard=()=>{
-    const navigate=useNavigate()
-    const handleLogout=()=>{
-        console.log("Logout Clicked");
-        navigate('/login')
-    }
-    return<>
-    <CssBaseline/>
-    <Grid>
-        <Grid item sm={2} sx={{backgroundColor:'purple',p:2,color:'white' ,width:'100vw'}}>
-            <h1>Dashboard</h1>
-            
-<Typography variant='h6'>Name:Ayushi</Typography>
-<Typography variant='h5'>Scholar No:211117831</Typography>
-<Typography variant='h5'>Branch:CSE</Typography>
-<Button variant='contained' color='warning' size='large' onClick={handleLogout} sx={{mt:8}}>Logout</Button>
-        </Grid>
-        <Grid item sm={8}>
+  useEffect(() => {
+    setError("");
+    const queryParams = new URLSearchParams(location.search);
+    const userEmail = queryParams.get("email");
 
-        </Grid>
-    </Grid>
-    </>
+    const fetchUserData = async () => {
+      try {
+        const querySnapshot = await getDocs(usersCollectionRef);
+        const usersData = [];
+        querySnapshot.forEach((doc) => {
+          const user = doc.data();
+          if (user.email === userEmail) {
+            usersData.push(user);
+          }
+        });
+        setUserData(usersData);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+
+    fetchUserData();
+  }, [usersCollectionRef, location]);
+
+  return (
+    <div>
+      <h2>Dashboard</h2>
+      {error && <Alert variant="danger">{error}</Alert>}
+      <div>
+        {userData.map((user, index) => (
+          <div key={index}>
+            <p>Name: {user.name}</p>
+            <p>Scholar No: {user.ScholarNo}</p>
+            <p>Branch: {user.Branch}</p>
+            <p>Course: {user.Course}</p>
+            <p>Contact: {user.Contact}</p>
+            <p>Email: {user.email}</p>
+            <hr />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
+
 export default Dashboard;

@@ -27,6 +27,7 @@ const SendPassEmail = () => {
   };
   return (
     <>
+      <h2 className="mb-12"> Forgot Password </h2>
       <Grid container justifyContent='center'>
         <Grid item sm={6} xs={12}>
           <Box

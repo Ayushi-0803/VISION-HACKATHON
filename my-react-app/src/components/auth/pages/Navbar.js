@@ -60,6 +60,16 @@ const Navbar = () => {
             >
              Register
             </Button>
+            <Button
+              component={NavLink}
+              to="/attendance"
+              style={({ isActive }) => {
+                return { backgroundColor: isActive ? "#6d1b7b" : " " }
+              }}
+              sx={{ color: "white" }}
+            >
+           Attendance
+            </Button>
           </Toolbar>
         </AppBar>
       </Box>
